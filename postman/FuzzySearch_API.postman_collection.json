@@ -1,0 +1,663 @@
+{
+  "info": {
+    "name": "FuzzySearch API",
+    "description": "Fuzzy search API using Fuse.js for vehicle inventory with year range validation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.1.0"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Search",
+      "item": [
+        {
+          "name": "Basic Search - Hyundai",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search?q=Hyundai&limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "Hyundai"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search with Pagination",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search?q=manguera&limit=10&page=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "manguera"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search with Custom Threshold",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search?q=Toyota&threshold=0.2&limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "Toyota"
+                },
+                {
+                  "key": "threshold",
+                  "value": "0.2"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search - No Results",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search?q=NonExistentBrand&limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "NonExistentBrand"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search - Missing Query",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search?limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Search by Brand",
+      "item": [
+        {
+          "name": "Search by Brand - Hyundai",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search/brand?brand=Hyundai&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search", "brand"],
+              "query": [
+                {
+                  "key": "brand",
+                  "value": "Hyundai"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search by Brand - Toyota",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search/brand?brand=Toyota&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search", "brand"],
+              "query": [
+                {
+                  "key": "brand",
+                  "value": "Toyota"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search by Brand - Great Wall",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search/brand?brand=Great Wall&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search", "brand"],
+              "query": [
+                {
+                  "key": "brand",
+                  "value": "Great Wall"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Search by Description",
+      "item": [
+        {
+          "name": "Search by Description - Manguera",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search/description?description=manguera&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search", "description"],
+              "query": [
+                {
+                  "key": "description",
+                  "value": "manguera"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search by Description - Pastillas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search/description?description=pastillas&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search", "description"],
+              "query": [
+                {
+                  "key": "description",
+                  "value": "pastillas"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search by Description - Sensor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search/description?description=sensor&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search", "description"],
+              "query": [
+                {
+                  "key": "description",
+                  "value": "sensor"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search by Description - Bujías",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search/description?description=bujías&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search", "description"],
+              "query": [
+                {
+                  "key": "description",
+                  "value": "bujías"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Advanced Search",
+      "item": [
+        {
+          "name": "Advanced Search - Hyundai Nuevo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search/advanced?q=Hyundai&condition=Nuevo&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search", "advanced"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "Hyundai"
+                },
+                {
+                  "key": "condition",
+                  "value": "Nuevo"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Advanced Search - OEM Quality",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search/advanced?quality=OEM&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search", "advanced"],
+              "query": [
+                {
+                  "key": "quality",
+                  "value": "OEM"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Advanced Search - Year Range",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search/advanced?q=Hyundai&yearFrom=2015&yearTo=2020&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search", "advanced"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "Hyundai"
+                },
+                {
+                  "key": "yearFrom",
+                  "value": "2015"
+                },
+                {
+                  "key": "yearTo",
+                  "value": "2020"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Search with Year Range",
+      "item": [
+        {
+          "name": "Year Range Search - Valid Year",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search/year-range?q=Hyundai manguera accent&year=2016&limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search", "year-range"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "Hyundai manguera accent"
+                },
+                {
+                  "key": "year",
+                  "value": "2016"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Year Range Search - Year Out of Range",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search/year-range?q=Hyundai manguera accent&year=2020&limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search", "year-range"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "Hyundai manguera accent"
+                },
+                {
+                  "key": "year",
+                  "value": "2020"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Year Range Search - Toyota 2018",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search/year-range?q=Toyota sensor&year=2018&limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search", "year-range"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "Toyota sensor"
+                },
+                {
+                  "key": "year",
+                  "value": "2018"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Year Range Search - Missing Query",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search/year-range?year=2016&limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search", "year-range"],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "2016"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Year Range Search - Invalid Year",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/search/year-range?q=Hyundai&year=invalid&limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "search", "year-range"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "Hyundai"
+                },
+                {
+                  "key": "year",
+                  "value": "invalid"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Vehicle Brands",
+      "item": [
+        {
+          "name": "Get All Vehicle Brands",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehicles",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "vehicles"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Statistics",
+      "item": [
+        {
+          "name": "Get Search Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stats"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Items",
+      "item": [
+        {
+          "name": "Get Item by ID - PRD-2022",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/item/PRD-2022",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "item", "PRD-2022"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Item by ID - PRD-2177",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/item/PRD-2177",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "item", "PRD-2177"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Item by ID - Non Existent",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/item/NON-EXISTENT",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "item", "NON-EXISTENT"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Set default headers if needed",
+          "pm.request.headers.add({",
+          "    key: 'Content-Type',",
+          "    value: 'application/json'",
+          "});"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Basic response validation",
+          "pm.test('Status code is 200', function () {",
+          "    pm.response.to.have.status(200);",
+          "});",
+          "",
+          "pm.test('Response has success property', function () {",
+          "    const response = pm.response.json();",
+          "    pm.expect(response).to.have.property('success');",
+          "});",
+          "",
+          "pm.test('Response time is less than 1000ms', function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+          "});"
+        ]
+      }
+    }
+  ]
+} 
